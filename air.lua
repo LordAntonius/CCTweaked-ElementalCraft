@@ -41,12 +41,12 @@ local function elementalcraftCraftSequence(t, itemName)
             return false
         end
         ME.exportItemToPeripheral({name=v, count = 1}, binderSide)
-        local n = 0
-        repeat 
-            n = ME.importItemFromPeripheral({name=itemName}, binderSide)
-            sleep(0.5)
-        until n > 0
     end
+    local n = 0
+    repeat 
+        n = ME.importItemFromPeripheral({name=itemName}, binderSide)
+        sleep(0.5)
+    until n > 0
 end
 
 for i = 1, 64 do
