@@ -2,11 +2,12 @@
 local MESide = "left"
 local binderSide = "right"
 
+
 -- Variables
 local ME = peripheral.wrap(MESide)
 
---local inert_crystal_name = "elementalcraft:inert_crystal"
 local air_crystal_recipe = {"elementalcraft:inert_crystal"}
+local swift_alloy_recipe = {"minecraft:gold_ingot", "elementalcraft:drenched_iron_ingot", "minecraft:copper_ingot", "minecraft:redstone", "elementalcraft:aircrystal"}
 
 local function MECraft (name, number)
     local item = {
@@ -39,7 +40,7 @@ local function elementalcraftCraftSequence(t, itemName)
             -- Not enough items
             return false
         end
-        ME.exportItemToPeripheral({name=v, amount = 1}, binderSide)
+        ME.exportItemToPeripheral({name=v, count = 1}, binderSide)
         local n = 0
         repeat 
             n = ME.importItemFromPeripheral({name=itemName}, binderSide)
@@ -48,8 +49,10 @@ local function elementalcraftCraftSequence(t, itemName)
     end
 end
 
-elementalcraftCraftSequence(air_crystal_recipe, "elementalcraft:aircrystal")
+for i = 1, 64 do
+elementalcraftCraftSequence(swift_alloy_recipe, "elementalcraft:swift_alloy_ingot")
 --while true do
     --MEAutocraft("minecraft:gold_ingot", 64)
     sleep(1)
+end
 --end
