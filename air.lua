@@ -33,15 +33,16 @@ local function MEAutocraft (name, number)
 end
 
 local function elementalcraftCraftSequence(t, itemName)
-    for k,v in t do
+    for k,v in pairs(t) do
         MEAutocraft(v,1)
         if ME.getItem({name = v}).amount < 1 then
             -- Not enough items
             return false
         end
         ME.exportItemToPeripheral({name=v, amount = 1}, binderSide)
+        local n = 0
         repeat 
-            local n = ME.importItemFromPeripheral(itemName, binderSide)
+            n = ME.importItemFromPeripheral({name=itemName}, binderSide)
             sleep(0.5)
         until n > 0
     end
